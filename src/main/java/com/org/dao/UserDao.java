@@ -44,8 +44,8 @@ public class UserDao {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("karthik");
 		EntityManager em = emf.createEntityManager();
 		Query q = em.createQuery("select u from User u where u.email=?1 and u.password=?2");
-		q.setParameter(1, "email");
-		q.setParameter(2, "password");
+		q.setParameter(1, email);
+		q.setParameter(2, password);
 		List<User> list = q.getResultList();
 		return list.get(0);
 	}
