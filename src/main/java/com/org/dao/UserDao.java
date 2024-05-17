@@ -41,14 +41,8 @@ EntityTransaction et = em.getTransaction();
 		return resultList;
 	}
 	public User fetchUserByEmailAndPassword(String email,String password) {
-<<<<<<< HEAD
-		
-		Query q = em.createQuery("Select u from User u where u.email=?1 and u.password=?2");
-=======
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("karthik");
-		EntityManager em = emf.createEntityManager();
 		Query q = em.createQuery("select u from User u where u.email=?1 and u.password=?2");
->>>>>>> 82e142c7f3ec6e8c4d5610dfa0c18b3c787fa626
+
 		q.setParameter(1, email);
 		q.setParameter(2, password);
 		List<User> list = q.getResultList();
@@ -57,14 +51,7 @@ EntityTransaction et = em.getTransaction();
 		else
 			return null;
 	}
-	public void addNote(User user,List<Notes> list) {
-		
-		User u = em.find(User.class, user.getId());
-		u.setNotes(list);
-		et.begin();
-		em.merge(u);
-		et.commit();
-	}
+	
 	public List<Notes> fetchUserNotes(User u){
 		
 		User user = em.find(User.class, u.getId());

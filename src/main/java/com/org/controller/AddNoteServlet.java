@@ -21,15 +21,19 @@ public class AddNoteServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		User user=(User) session.getAttribute("userObj");
 		String title = req.getParameter("title");
-		String description = req.getParameter("note");
+		String description = req.getParameter("description");
 		Notes n=new Notes();
 		n.setTitle(title);
 		n.setDescrp(description);
-		n.setUser(user);
+		
 		List<Notes> list=new ArrayList<Notes>();
 		list.add(n);
-		UserDao ud=new UserDao();
-		ud.addNote(user,list);
+		user.setNotes(list);
+		n.setUser(user);
+		UserDao udao=new UserDao();
+		udao.saveAndUpdateUser(user);
+		
+		session.setAttribute("success","notes added successfully");
 		resp.sendRedirect("home.jsp");
 	}
 }
